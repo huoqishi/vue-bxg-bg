@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "build": "cross-env NODE_ENV=production node index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,8 @@
     "express-session": "^1.15.5",
     "glob": "^7.1.2",
     "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.0"
   }
 }
