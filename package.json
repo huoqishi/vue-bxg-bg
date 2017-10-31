@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "build": "cross-env NODE_ENV=production node index.js"
+    "build": "cross-env NODE_ENV=production node index.js",
+    "apiserver": "browser-sync start --server ./apidoc --port 8080 --files \"./apidoc/vender/*.js,./apidoc/index.html\" & npm run watchapi",
+    "preapiserver": "npm run api",
+    "api": "apidoc -i controllers/ -o apidoc/ ",
+    "watchapi": "watch 'npm run api' ./controllers/"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +19,15 @@
     "express": "^4.15.4",
     "express-session": "^1.15.5",
     "glob": "^7.1.2",
+    "mongoose": "^4.12.4",
+    "muter": "^0.6.0",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
+    "apidoc": "^0.17.6",
+    "browser-sync": "^2.18.13",
     "cross-env": "^5.0.5",
-    "nodemon": "^1.12.0"
+    "nodemon": "^1.12.0",
+    "watch": "^1.0.2"
   }
 }

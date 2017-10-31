@@ -7,3 +7,9 @@
 node_modules/
 npm-debug.log
 yarn-error.log
+
+# jsdoc
+out/
+
+# apidoc
+apidoc/
