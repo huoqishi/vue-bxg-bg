@@ -42,6 +42,7 @@ app.use((req, res, next) => {
 })
 app.use(express.static('./public'))
 app.use(express.static('./uploads'))
+app.use('/api', express.static('./apidoc'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(session({
