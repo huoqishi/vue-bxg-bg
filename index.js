@@ -52,9 +52,9 @@ app.use(session({
     url: config.mongodbUrl
   }),
   secret: 'i am a chinese',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
-  cookie: {httpOnly: false, maxAge: 3600 * 1000 * 24 * 7}
+  cookie: {maxAge: 3600 * 1000 * 24 * 7}
 }))
 // 登陆验证
 app.use((request, response, next) => {
