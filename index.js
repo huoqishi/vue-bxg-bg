@@ -59,7 +59,7 @@ app.use((request, response, next) => {
   const filtersApi = ['/signin'] // 未登陆时允许访问的接口
   const filtersHtml = ['/signin.html'] // 未登陆时允许访问的html页面
   const urlObj = url.parse(request.url)
-  if (!request.url) {next}
+  if (!request.url) {next()}
   if (request.session.user) {
     return next()
   }
