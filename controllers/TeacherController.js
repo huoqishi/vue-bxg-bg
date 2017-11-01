@@ -87,6 +87,8 @@ router.post('/avatar', upload.single('avatar'), (request, response) => {
  * @apiName userinfo
  * @apiGroup UserInfo
  *
+ * * @apiParam {string} _id 用户_id
+ * 
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} userinfo  所查询到的用户信息
