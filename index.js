@@ -31,7 +31,7 @@ app.use((req, res, next) => {
     }
     Object.assign(options, optionsPre)
     res.set(options)
-    res.end('新手请忽略此请求')
+    res.end('这次请求是用来关闭浏览器的跨域限制的')
     return
   }
   res.set(options)
