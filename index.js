@@ -23,7 +23,7 @@ app.use((req, res, next) => {
       // 允许发送cookie;CORS请求默认不发送Cookie和HTTP认证信息
       // 需要保证xhr.withCredentials值为true,当然，它的的默认值就是true
       'Access-Control-Allow-Credentials': true,
-      'Access-Control-Expose-Headers': 'FooBar', // 允许客户端读取的响应头
+      'Access-Control-Expose-Headers': 'set-cookie', // 允许客户端读取的响应头
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE', // 允许浏览器发出的请求类型
       'Access-Control-Allow-Headers': 'Content-Type', // 额外的自定义头信息, 允许用户发出的头信息
       'Access-Control-Max-Age': '36000', // 预检请求的有效期，此期间内，不再次预检,单位秒
@@ -52,7 +52,7 @@ app.use(session({
   secret: 'i am a chinese',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { maxAge: 3600 * 1000 * 24 * 7}
 }))
 // 登陆验证
 app.use((request, response, next) => {
