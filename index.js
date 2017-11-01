@@ -57,18 +57,18 @@ app.use(session({
 // 登陆验证
 app.use((request, response, next) => {
   const filtersApi = ['/signin'] // 未登陆时允许访问的接口
-  const filtersHtml = ['/signin.html'] // 未登陆时允许访问的html页面
+  // const filtersHtml = ['/signin.html'] // 未登陆时允许访问的html页面
   const urlObj = url.parse(request.url)
-  if (!request.url) {next()}
+  // if (!request.url) {next()}
   if (request.session.user) {
     return next()
   }
   if (filtersApi.find(item => item === urlObj.pathname)) {
     return next()
   }
-  if (filtersHtml.find(item => item === urlObj.pathname)) {
-    return response.redirect('signin.html')
-  }
+  // if (filtersHtml.find(item => item === urlObj.pathname)) {
+  //   return response.redirect('signin.html')
+  // }
   response.send({
     errcode: 10001,
     errmsg: '未登陆，请先登陆'

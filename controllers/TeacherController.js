@@ -27,7 +27,7 @@ router.post('/signin', (request, response, next) => {
         errmsg: '用户名或者密码不正确'
       })
     }
-    request.session.teacher = doc
+    request.session.user = doc
     const data = Object.assign(doc, {password: undefined})
     response.send({
       errcode: 0,
@@ -46,7 +46,7 @@ router.post('/signin', (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  */
 router.post('/signout', (request, response, next) => {
-  const result = delete request.session.teacher
+  const result = delete request.session.user
   if (result) {
     return response.send({
       errcode: 0,
