@@ -79,7 +79,7 @@ router.post('/avatar', upload.single('avatar'), (request, response) => {
   response.send({
     errcode: 0,
     errmsg: 'ok',
-    avatarUrl: request.file.path
+    avatarUrl: path.join('/', path.basename(request.file.path))
   })
 })
 /**
