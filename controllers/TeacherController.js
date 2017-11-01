@@ -13,7 +13,7 @@ module.exports = router
  * @apiParam {string} username 用户名
  * @apiParam {string} password 用户密码
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误1
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} data  将要响应给客户端的数据
  */
@@ -42,7 +42,7 @@ router.post('/signin', (request, response, next) => {
  * @apiName signout
  * @apiGroup Sign
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  */
 router.post('/signout', (request, response, next) => {
@@ -65,7 +65,7 @@ router.post('/signout', (request, response, next) => {
  *
  * @apiParam {Buffer} avatar 一张头像图片
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {string} avatarUrl 新头像地址
  */
@@ -89,7 +89,7 @@ router.post('/avatar', upload.single('avatar'), (request, response) => {
  *
  * * @apiParam {string} _id 用户_id
  * 
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} userinfo  所查询到的用户信息
  */
@@ -134,7 +134,7 @@ router.get('/userinfo', (request, response, next) => {
  * @apiParam {string} birttDay 讲师生日
  * @apiParam {string} introduce 讲师介绍
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  */
 router.post('/teacher/update', (request, response) => {
@@ -180,7 +180,7 @@ router.post('/teacher/update', (request, response) => {
  * @apiParam {string} username 用户名
  * @apiParam {string} password 用户密码
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  */
 router.post('/teacher/new', (request, response, next) => {
@@ -216,7 +216,7 @@ router.post('/teacher/new', (request, response, next) => {
  * @apiName teacher/{_id}
  * @apiGroup Teacher
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} teacher  所查询到的用户信息
  */
@@ -252,7 +252,7 @@ router.get('/teachers/:_id', (request, response, next) => {
  *
  * @apiParam {string} _id 要编辑的讲师的id
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} teacher  所查询到的用户信息
  */
@@ -291,7 +291,7 @@ router.get('/teacher/edit', (request, response, next) => {
  * @apiParam {number} gender 讲师性别
  * @apiParam {string} username 讲师姓名
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  */
 router.post('/teacher/update', (request, response, next) => {
@@ -326,7 +326,7 @@ router.post('/teacher/update', (request, response, next) => {
  * @apiParam {string} _id 要编辑的讲师的id
  * @apiParam {string} status 讲师的状态, 0表示已被注销, 1表示已被启用
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {string} status  修改后讲师的状态
  */
@@ -364,7 +364,7 @@ router.post('/teacher/handler', (request, response, next) => {
  * @apiParam {string} page 页码
  * @apiParam {string} count 需要的数据条数
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {number} total 总条数
  * @apiSuccess {Array} teachers 查询出的所有讲师信息
@@ -396,7 +396,7 @@ router.get('/teachers', (request, response, next) => {
  *
  * @apiParam {string} query 查询条件
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {number} total 查询出的总条数
  * @apiSuccess {Array} teachers 查询出的所有讲师信息

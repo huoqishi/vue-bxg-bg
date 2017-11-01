@@ -10,7 +10,7 @@ module.exports = router
  * @apiName /user/status
  * @apiGroup Sign
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误1
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示已登陆
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} data  将要响应给客户端的数据
  */
