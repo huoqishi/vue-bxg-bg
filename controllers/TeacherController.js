@@ -6,6 +6,75 @@ const upload = multer({ dest: path.resolve('../uploads') })
 const router = express.Router()
 module.exports = router
 
+/**
+ * @api {get} /teachers 分页获取所有讲师的简要信息
+ * @apiName /teachers
+ * @apiGroup Teacher
+ *
+ * @apiParam {string} page 页码
+ * @apiParam {string} count 需要的数据条数
+ *
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
+ * @apiSuccess {string} errmsg  错误的提示信息
+ * @apiSuccess {number} total 总条数
+ * @apiSuccess {Array} teachers 查询出的所有讲师信息
+ * @apiSuccessExample {javascript} 响应结果示例
+ * {
+    "errcode": 0,
+    "errmsg": "ok",
+    "total": 2,
+    "teachers": [
+        {
+            "_id": "59f90fe49b5463742c8d2cc9",
+            "username": "前端学院",
+            "email": null,
+            "phone": "",
+            "birthDay": "2017-11-02T20:17:41.921Z",
+            "joinDate": "2017-11-02T20:17:41.921Z",
+            "gender": -1,
+            "nickname": "哈哈哈哈"
+        },{
+            "_id": "19f90fe49b5463742c8d2cc2",
+            "username": "阳春白雪",
+            "email": null,
+            "phone": "",
+            "birthDay": "2017-11-02T20:17:41.921Z",
+            "joinDate": "2017-11-02T20:17:41.921Z",
+            "gender": -1,
+            "nickname": "阳春黑雪"
+        }
+    ]
+ */
+router.get('/teachers', (request, response, next) => {
+  let {page, count} = request.query
+  page = parseInt(page)
+  count = parseInt(count)
+  page = page === isNaN || page < 1 ? 1 : page
+  count = count === isNaN || count < 1 ? 10 : count
+  const skip = (page - 1) * count
+  const p1 = Teacher.find({}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
+  const p2 = Teacher.count({})
+  Promise.all([p1, p2]).then(results => {
+    results[0].forEach(item => item.password = undefined)
+    response.send({
+      errcode: 0,
+      errmsg: 'ok',
+      total: results[1],
+      teachers: results[0]
+    })
+  }, next)
+})
+
+// 权限
+router.use((request, response, next) => {
+  if (request.session.user.type !== 1) {
+    return response.send({
+      errcode: 14003,
+      errmsg: '您不是管理员,没有权限进行操作!'
+    })
+  }
+  next ()
+})
 
 /**
  * @api {post} /teacher/new 添加一个新的讲师账号
@@ -14,6 +83,8 @@ module.exports = router
  *
  * @apiParam {string} username 用户名
  * @apiParam {string} password 用户密码
+ * @apiParam {string} joinDate 入职日期
+ * @apiParam {number} type 讲师类型,0是普通讲师，1是管理员
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
@@ -164,6 +235,12 @@ router.post('/teacher/edit', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {string} status  修改后讲师的状态
+ * @apiSuccessExample {javascript} 响应结果示例
+ * {
+ *   errcode: 0,
+ *   errmsg: '修改成功',
+ *   status: 0
+ * }
  */
 router.post('/teacher/handler', (request, response, next) => {
   // *注意:* 传入的_id如果不是12或者24位则会报错
@@ -192,41 +269,8 @@ router.post('/teacher/handler', (request, response, next) => {
 })
 
 /**
- * @api {get} /teachers 分页获取所有讲师的简要信息
- * @apiName /teachers
- * @apiGroup Teacher
- *
- * @apiParam {string} page 页码
- * @apiParam {string} count 需要的数据条数
- *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
- * @apiSuccess {string} errmsg  错误的提示信息
- * @apiSuccess {number} total 总条数
- * @apiSuccess {Array} teachers 查询出的所有讲师信息
- */
-router.get('/teachers', (request, response, next) => {
-  let {page, count} = request.query
-  page = parseInt(page)
-  count = parseInt(count)
-  page = page === isNaN || page < 1 ? 1 : page
-  count = count === isNaN || count < 1 ? 10 : count
-  const skip = (page - 1) * count
-  const p1 = Teacher.find({}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
-  const p2 = Teacher.count({})
-  Promise.all([p1, p2]).then(results => {
-    results[0].forEach(item => item.password = undefined)
-    response.send({
-      errcode: 0,
-      errmsg: 'ok',
-      total: results[1],
-      teachers: results[0]
-    })
-  }, next)
-})
-
-/**
- * @api {get} /teachers/search 搜索讲师
- * @apiName /teachers/search
+ * @api {get} /search 搜索讲师
+ * @apiName /search
  * @apiGroup Teacher
  *
  * @apiParam {string} query 查询条件
@@ -234,9 +278,9 @@ router.get('/teachers', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {number} total 查询出的总条数
- * @apiSuccess {Array} teachers 查询出的所有讲师信息
+ * @apiSuccess {Array}  teachers 查询出的所有讲师信息
  */
-router.get('/teachers/search', (request, response, next) => {
+router.get('/search', (request, response, next) => {
   let {query} = request.query
   const reg = new RegExp(query, 'ig')
   const p1 = Teacher.find({username: reg}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
