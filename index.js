@@ -16,7 +16,8 @@ const io = socketIO(server)
 app.use((req, res, next) => {
   const origin = req.headers.origin
   const acrm = req.headers['access-control-request-method'] // 预检时有此头
-  const options = {'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Credentials': true}
+  const options = {'Access-Control-Allow-Origin': origin,
+  'Access-Control-Allow-Credentials': true}
   if (acrm) {
     // 允许跨域!
     const optionsPre = {
