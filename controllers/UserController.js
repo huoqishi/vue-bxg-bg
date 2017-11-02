@@ -12,7 +12,6 @@ module.exports = router
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示已登陆
  * @apiSuccess {string} errmsg  错误的提示信息
- * @apiSuccess {Object} data  将要响应给客户端的数据
  */
 router.get('/user/status', (request, response) => {
   response.send({
@@ -31,7 +30,7 @@ router.get('/user/status', (request, response) => {
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
- * @apiSuccess {Object} data  将要响应给客户端的数据
+ * @apiSuccess {Object} user    当前登陆的用户的部分信息
  */
 router.post('/signin', (request, response, next) => {
   const {username, password} = request.body
@@ -44,11 +43,11 @@ router.post('/signin', (request, response, next) => {
       })
     }
     request.session.user = doc
-    const data = Object.assign(doc, {password: undefined})
+    const user = Object.assign(doc, {password: undefined})
     response.send({
       errcode: 0,
       errmsg: 'ok',
-      data
+      user
     })
   }, next)
 })
