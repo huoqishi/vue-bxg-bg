@@ -85,13 +85,13 @@ files.forEach(file => {
   arr.push(router)
   typeof router === 'function' ? app.use(router) : console.log(`${file} not provider a router `)
 })
-app.use((err, req, res, next) => {
-  res.status(500)
-  res.send({
-    errcode: 15000,
-    errmsg: err
-  })
-})
+// app.use((err, req, res, next) => {
+//   res.status(500)
+//   res.send({
+//     errcode: 15000,
+//     errmsg: err
+//   })
+// })
 // if (config.env === 'production')
 server.listen(config.PORT, err => {
   if (err) {
