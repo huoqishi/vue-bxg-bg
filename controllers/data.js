@@ -219,4 +219,7 @@ Teacher.updateMany({}, {introduce: `
   1995年创办中国第一家互联网商业信息发布网站“中国黄页”，
   1998年出任中国国际电子商务中心国富通信息技术发展有限公司总经理，
   1999年创办阿里巴巴，并担任阿里集团CEO、董事局主席。`})
+.then(result => {
+  console.log('更新成功')
+})
 // module.exports
