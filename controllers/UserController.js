@@ -209,3 +209,22 @@ router.post('/teacher/update', (request, response) => {
       })
     }, next)
 })
+
+/**
+ * @api {get} /region 获取全国省市区数据
+ * @apiName region
+ * @apiGroup Region
+ *
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
+ * @apiSuccess {string} errmsg  错误的提示信息
+ * @apiSuccess {Object} region  全国省市区数据
+ */
+router.get('/region', (request, response) => {
+  // result.sendFile('../public/region.json')
+  const region = require('../public/region.json')
+  response.send({
+    errcode: 0,
+    errmsg: 'ok',
+    region
+  })
+})
