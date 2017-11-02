@@ -175,7 +175,7 @@ router.get('/userinfo', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  */
-router.post('/userinfo', (request, response) => {
+router.post('/userinfo', (request, response, next) => {
   const {
     username,
     nickname,
