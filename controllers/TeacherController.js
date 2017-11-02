@@ -118,6 +118,34 @@ router.post('/teachers/new', (request, response, next) => {
 })
 
 /**
+ * @api {get} /teachers/search 搜索讲师
+ * @apiName /teachers/search
+ * @apiGroup Teacher
+ *
+ * @apiParam {string} query 查询条件
+ *
+ * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
+ * @apiSuccess {string} errmsg  错误的提示信息
+ * @apiSuccess {number} total 查询出的总条数
+ * @apiSuccess {Array}  teachers 查询出的所有讲师信息
+ */
+router.get('/teachers/search', (request, response, next) => {
+  let {query} = request.query
+  const reg = new RegExp(query, 'ig')
+  const p1 = Teacher.find({username: reg}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
+  const p2 = Teacher.count({username: reg})
+  Promise.all([p1, p2]).then(results => {
+    results[0].forEach(item => item.password = undefined)
+    response.send({
+      errcode: 0,
+      errmsg: 'ok',
+      total: results[1],
+      teachers: results[0]
+    })
+  }, next)
+})
+
+/**
  * @api {get} /teachers/{_id} 查看讲师详细信息
  * @apiName teacher/{_id}
  * @apiGroup Teacher
@@ -268,30 +296,4 @@ router.post('/teachers/handler', (request, response, next) => {
   }, next)
 })
 
-/**
- * @api {get} /search 搜索讲师
- * @apiName /search
- * @apiGroup Teacher
- *
- * @apiParam {string} query 查询条件
- *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
- * @apiSuccess {string} errmsg  错误的提示信息
- * @apiSuccess {number} total 查询出的总条数
- * @apiSuccess {Array}  teachers 查询出的所有讲师信息
- */
-router.get('/search', (request, response, next) => {
-  let {query} = request.query
-  const reg = new RegExp(query, 'ig')
-  const p1 = Teacher.find({username: reg}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
-  const p2 = Teacher.count({username: reg})
-  Promise.all([p1, p2]).then(results => {
-    results[0].forEach(item => item.password = undefined)
-    response.send({
-      errcode: 0,
-      errmsg: 'ok',
-      total: results[1],
-      teachers: results[0]
-    })
-  }, next)
-})
+
