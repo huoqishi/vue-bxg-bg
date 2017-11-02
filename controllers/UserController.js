@@ -123,7 +123,7 @@ router.get('/userinfo', (request, response, next) => {
     if (!doc) {
       return response.send({
         errcode: 10001,
-        errmsg: '用户不存在'
+        errmsg: '用户不存在:' + _id
       })
     }
     const teacher = Object.assign(doc, {password: undefined})
