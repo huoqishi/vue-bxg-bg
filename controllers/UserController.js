@@ -101,24 +101,23 @@ router.post('/avatar', upload.single('avatar'), (request, response) => {
   })
 })
 /**
- * @api {get} /userinfo 获取用户个人资料
+ * @api {get} /userinfo 获取个人资料
  * @apiName userinfo
  * @apiGroup User
- *
- * * @apiParam {string} _id 用户_id
  * 
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
- * @apiSuccess {Object} userinfo  所查询到的用户信息
+ * @apiSuccess {Object} user    所查询到的个人资料
  */
 router.get('/userinfo', (request, response, next) => {
-  const {_id} = request.params
-  if ([12, 24].indexOf(_id && _id.length) !== -1) {
-    return response.send({
-      errcode: 10001,
-      errmsg: '正确的_id应该是一个长度为12或者24的字符串'
-    })
-  }
+  // const {_id} = request.params
+  // if ([12, 24].indexOf(_id && _id.length) !== -1) {
+  //   return response.send({
+  //     errcode: 10001,
+  //     errmsg: '正确的_id应该是一个长度为12或者24的字符串'
+  //   })
+  // }
+  const {_id} = request.session.user._id
   Teacher.findOne({_id}) // *注意:* 传入的_id如果不是12或者24位则会报错
   .then(doc => {
     if (!doc) {
