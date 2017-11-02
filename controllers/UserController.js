@@ -5,6 +5,7 @@ const multer = require('multer')
 const config = require('../config/config.js')
 const Teacher = require('../models/Teacher.js')
 const upload = multer({ dest: path.join(__dirname, '../uploads') })
+
 const router = express.Router()
 module.exports = router
 /**
