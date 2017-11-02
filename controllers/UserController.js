@@ -1,4 +1,5 @@
 const path = require('path')
+const url = require('url')
 const express = require('express')
 const multer = require('multer')
 const config = require('../config/config.js')
@@ -44,7 +45,7 @@ router.post('/signin', (request, response, next) => {
       })
     }
     request.session.user = doc
-    request.session.user.avatar = path.join(config.host, request.session.user.avatar)
+    request.session.user.avatar = url.resolve(config.host, request.session.user.avatar)
     const user = Object.assign(doc, {password: undefined})
     response.send({
       errcode: 0,
