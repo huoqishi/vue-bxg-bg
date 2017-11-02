@@ -108,6 +108,9 @@ router.post('/avatar', upload.single('avatar'), (request, response) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} user    所查询到的个人资料
+ * 
+ * @apiSuccessExample {javascript} 响应结果示例
+ * 
  */
 router.get('/userinfo', (request, response, next) => {
   // const {_id} = request.params
@@ -117,21 +120,21 @@ router.get('/userinfo', (request, response, next) => {
   //     errmsg: '正确的_id应该是一个长度为12或者24的字符串'
   //   })
   // }
-  const {_id} = request.session.user._id
+  const {_id} = request.session.user
   Teacher.findOne({_id}) // *注意:* 传入的_id如果不是12或者24位则会报错
   .then(doc => {
     if (!doc) {
       return response.send({
         errcode: 10001,
-        session: request.session,
-        errmsg: '用户不存在:' + _id
+        // session: request.session,
+        errmsg: '用户不存在a:' + _id
       })
     }
-    const teacher = Object.assign(doc, {password: undefined})
+    const user = Object.assign(doc, {password: undefined})
     response.send({
       errcode: 0,
       errmsg: 'ok',
-      teacher: teacher
+      user
     })
   }, next)
 })
