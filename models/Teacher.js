@@ -5,6 +5,10 @@ const userSchema = mongoose.Schema({
     type: String,
     unique: true
   },
+  nickname: {
+    type: String,
+    default: ''
+  },
   password: {
     type: String
   },
@@ -48,6 +52,10 @@ const userSchema = mongoose.Schema({
     default: ''
   },
   district: {
+    type: String,
+    default: ''
+  },
+  introduce: {
     type: String,
     default: ''
   },

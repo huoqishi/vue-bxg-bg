@@ -169,7 +169,7 @@ router.get('/userinfo', (request, response, next) => {
  * @apiParam {string} phone 讲师手机号
  * @apiParam {string} email 讲师邮箱
  * @apiParam {string} joinDate 讲师入职日期
- * @apiParam {string} birttDay 讲师生日
+ * @apiParam {string} birthDay 讲师生日
  * @apiParam {string} introduce 讲师介绍
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
