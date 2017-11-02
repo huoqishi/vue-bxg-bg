@@ -189,7 +189,7 @@ router.post('/userinfo', (request, response) => {
     city,
     district} = request.body
   const {_id} = request.session.user
-  t.updateMany({_id}, {
+  Teacher.updateMany({_id}, {
     username,
     nickname,
     gender,
