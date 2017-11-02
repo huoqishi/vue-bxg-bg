@@ -57,7 +57,7 @@ router.post('/teacher/new', (request, response, next) => {
  */
 router.get('/teachers/:_id', (request, response, next) => {
   const {_id} = request.params
-  if ([12, 24].indexOf(_id && _id.length) !== -1) {
+  if ([12, 24].indexOf(_id && _id.length) === -1) {
     return response.send({
       errcode: 10001,
       errmsg: '正确的_id应该是一个长度为12或者24的字符串'
@@ -93,7 +93,7 @@ router.get('/teachers/:_id', (request, response, next) => {
  */
 router.get('/teacher/edit', (request, response, next) => {
   const {_id} = request.query
-  if ([12, 24].indexOf(_id && _id.length) !== -1) {
+  if ([12, 24].indexOf(_id && _id.length) === -1) {
     return response.send({
       errcode: 10001,
       errmsg: '正确的_id应该是一个长度为12或者24的字符串'
@@ -132,7 +132,7 @@ router.get('/teacher/edit', (request, response, next) => {
 router.post('/teacher/edit', (request, response, next) => {
   // *注意:* 传入的_id如果不是12或者24位则会报错
   const {_id, username, joinDate, type, gender} = request.body
-  if ([12, 24].indexOf(_id && _id.length) !== -1) {
+  if ([12, 24].indexOf(_id && _id.length) === -1) {
     return response.send({
       errcode: 10001,
       errmsg: '正确的_id应该是一个长度为12或者24的字符串'
@@ -169,7 +169,7 @@ router.post('/teacher/handler', (request, response, next) => {
   // *注意:* 传入的_id如果不是12或者24位则会报错
   // mongoose.Types.ObjectId()
   const {_id, status} = request.body
-  if ([12, 24].indexOf(_id && _id.length) !== -1) {
+  if ([12, 24].indexOf(_id && _id.length) === -1) {
     return response.send({
       errcode: 10001,
       errmsg: '正确的_id应该是一个长度为12或者24的字符串'
