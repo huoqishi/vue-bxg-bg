@@ -20,13 +20,16 @@ const userSchema = mongoose.Schema({
     default: -1, // 0 是男孩，1是女孩，-1是未设置值
   },
   joinDate: { // 入职日期
-    type: Date
+    type: Date,
+    default: Date.now
   },
   birthDay: { // 生日
-    type: Date
+    type: Date,
+    default: Date.now
   },
   phone: { // 手机号
-    type: String
+    type: String,
+    default: ''
   },
   status: { // 讲师的状态，0表示已被注销，1表示已被启用
     type: Number,
@@ -37,13 +40,16 @@ const userSchema = mongoose.Schema({
     default: 0,
   },
   province: {
-    type: String
+    type: String,
+    default: ''
   },
   city: {
-    type: String
+    type: String,
+    default: ''
   },
   district: {
-    type: String
+    type: String,
+    default: ''
   },
   created: {
     type: Date,

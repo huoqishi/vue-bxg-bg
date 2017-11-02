@@ -45,7 +45,11 @@ router.post('/signin', (request, response, next) => {
       })
     }
     request.session.user = doc
-    const user = Object.assign(doc, {password: undefined})
+    const user = {
+      _id: doc._id,
+      username: doc.username,
+      avatar: doc.avatar
+    }
     user.avatar = url.resolve(config.host, user.avatar)
     response.send({
       errcode: 0,
@@ -110,7 +114,20 @@ router.post('/avatar', upload.single('avatar'), (request, response) => {
  * @apiSuccess {Object} user    所查询到的个人资料
  * 
  * @apiSuccessExample {javascript} 响应结果示例
- * 
+ * {
+ *    "errcode":0,
+ *    "errmsg":"ok",
+ *    "user":{
+ *     "_id":"59f90fe49b5463742c8d2cc9",
+ *     "username":"前端学院",
+ *     "isdel":false,
+ *     "created":"2017-11-02T18:44:14.504Z",
+ *     "type":0,
+ *     "status":0,
+ *     "gender":-1,
+ *     "avatar":"/img/avatar.jpg"
+ *    }
+ *  }
  */
 router.get('/userinfo', (request, response, next) => {
   // const {_id} = request.params
