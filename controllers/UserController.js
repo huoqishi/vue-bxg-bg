@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const multer = require('multer')
+const config = require('../config/config-prod.js')
 const Teacher = require('../models/Teacher.js')
 const upload = multer({ dest: path.resolve('../uploads') })
 const router = express.Router()
