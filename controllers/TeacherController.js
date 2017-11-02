@@ -66,7 +66,7 @@ router.get('/teachers', (request, response, next) => {
 })
 
 // 权限
-router.use('/teachers'(request, response, next) => {
+router.use('/teachers', (request, response, next) => {
   if (request.session.user.type !== 1) {
     return response.send({
       errcode: 14003,
