@@ -105,7 +105,7 @@ router.post('/avatar', upload.single('avatar'), (request, response, next) => {
       response.send({
         errcode: 0,
         errmsg: 'ok',
-        avatarUrl: url.resolve(config.host, filename)
+        avatar: url.resolve(config.host, filename)
       })
     },next)
 })
