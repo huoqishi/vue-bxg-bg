@@ -89,7 +89,7 @@ router.post('/signout', (request, response, next) => {
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
- * @apiSuccess {string} avatarUrl 新头像地址
+ * @apiSuccess {string} avatar 新头像地址
  */
 router.post('/avatar', upload.single('avatar'), (request, response) => {
   if (!request.file) {
@@ -101,7 +101,7 @@ router.post('/avatar', upload.single('avatar'), (request, response) => {
   response.send({
     errcode: 0,
     errmsg: 'ok',
-    avatarUrl: path.join('/', path.basename(request.file.path))
+    avatarUrl: url.resolve(config.host, path.basename(request.file.path))
   })
 })
 /**
