@@ -123,6 +123,7 @@ router.get('/userinfo', (request, response, next) => {
     if (!doc) {
       return response.send({
         errcode: 10001,
+        session: request.session,
         errmsg: '用户不存在:' + _id
       })
     }
