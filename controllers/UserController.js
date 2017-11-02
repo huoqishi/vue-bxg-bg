@@ -91,18 +91,23 @@ router.post('/signout', (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {string} avatar 新头像地址
  */
-router.post('/avatar', upload.single('avatar'), (request, response) => {
+router.post('/avatar', upload.single('avatar'), (request, response, next) => {
   if (!request.file) {
     return response.send({
       errcode: 1001,
       errmsg: '图片上传失败'
     })
   }
-  response.send({
-    errcode: 0,
-    errmsg: 'ok',
-    avatarUrl: url.resolve(config.host, path.basename(request.file.path))
-  })
+  const {_id} = request.session.user
+  const filename = path.basename(request.file.path)
+  Teacher.updateMany({_id}, {avatar: filename})
+  .then(result => {
+      response.send({
+        errcode: 0,
+        errmsg: 'ok',
+        avatarUrl: url.resolve(config.host, filename)
+      })
+    },next)
 })
 /**
  * @api {get} /userinfo 获取个人资料
