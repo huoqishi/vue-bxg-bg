@@ -45,8 +45,7 @@ router.post('/signin', (request, response, next) => {
       })
     }
     request.session.user = doc
-    request.session.user.avatar = url.resolve(config.host, request.session.user.avatar)
-    const user = Object.assign(doc, {password: undefined})
+    const user = Object.assign(doc, {password: undefined}, url.resolve(config.host, request.session.user.avatar))
     response.send({
       errcode: 0,
       errmsg: 'ok',
