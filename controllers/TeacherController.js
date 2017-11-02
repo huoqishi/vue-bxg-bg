@@ -81,7 +81,7 @@ router.get('/teachers/:_id', (request, response, next) => {
 })
 
 /**
- * @api {get} /teachers/edit 获取讲师需要被编辑的资料
+ * @api {get} /teachers/edit 获取讲师需要被编辑的讲师信息
  * @apiName teacher/edit
  * @apiGroup Teacher
  *
@@ -116,8 +116,8 @@ router.get('/teacher/edit', (request, response, next) => {
   }, next)
 })
 /**
- * @api {post} /teachers/update 更新被编辑的讲师信息
- * @apiName teacher/update
+ * @api {post} /teachers/edit 更新被编辑的讲师信息
+ * @apiName teacher/edit
  * @apiGroup Teacher
  *
  * @apiParam {string} _id 要编辑的讲师的id
@@ -129,7 +129,7 @@ router.get('/teacher/edit', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  */
-router.post('/teacher/update', (request, response, next) => {
+router.post('/teacher/edit', (request, response, next) => {
   // *注意:* 传入的_id如果不是12或者24位则会报错
   const {_id, username, joinDate, type, gender} = request.body
   if ([12, 24].indexOf(_id && _id.length) !== -1) {
@@ -205,7 +205,7 @@ router.post('/teacher/handler', (request, response, next) => {
  * @apiSuccess {Array} teachers 查询出的所有讲师信息
  */
 router.get('/teachers', (request, response, next) => {
-  let {page, count} = request.body
+  let {page, count} = request.query
   page = parseInt(page)
   count = parseInt(count)
   page = page === isNaN || page < 1 ? 1 : page
@@ -237,7 +237,7 @@ router.get('/teachers', (request, response, next) => {
  * @apiSuccess {Array} teachers 查询出的所有讲师信息
  */
 router.get('/teachers/search', (request, response, next) => {
-  let {query} = request.body
+  let {query} = request.query
   const reg = new RegExp(query, 'ig')
   const p1 = Teacher.find({username: reg}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
   const p2 = Teacher.count({username: reg})
