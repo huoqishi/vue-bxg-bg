@@ -132,7 +132,7 @@ router.post('/teachers/new', (request, response, next) => {
 router.get('/teachers/search', (request, response, next) => {
   let {query} = request.query
   const reg = new RegExp(query, 'ig')
-  const p1 = Teacher.find({username: reg}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
+  const p1 = Teacher.find({username: reg}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).exec()
   const p2 = Teacher.count({username: reg})
   Promise.all([p1, p2]).then(results => {
     results[0].forEach(item => item.password = undefined)
