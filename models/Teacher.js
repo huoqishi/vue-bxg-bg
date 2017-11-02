@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  birthDay: { // 生日
+  birthDay: { // 出生日期
     type: Date,
     default: Date.now
   },

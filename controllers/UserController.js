@@ -188,7 +188,7 @@ router.post('/userinfo', (request, response) => {
     province,
     city,
     district} = request.body
-  const _id = request.session.user
+  const {_id} = request.session.user
   t.updateMany({_id}, {
     username,
     nickname,
@@ -201,11 +201,10 @@ router.post('/userinfo', (request, response) => {
     province,
     city,
     district}).then((doc) => {
-      const teacher = Object.assign(doc, {password: undefined})
+      // const teacher = Object.assign(doc, {password: undefined})
       response.send({
         errcode: 0,
-        errmsg: 'ok',
-        teacher
+        errmsg: '更新成功'
       })
     }, next)
 })
