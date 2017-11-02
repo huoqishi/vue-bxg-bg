@@ -66,7 +66,7 @@ router.get('/teachers', (request, response, next) => {
 })
 
 // 权限
-router.use((request, response, next) => {
+router.use('/teachers'(request, response, next) => {
   if (request.session.user.type !== 1) {
     return response.send({
       errcode: 14003,
@@ -89,7 +89,7 @@ router.use((request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  */
-router.post('/teacher/new', (request, response, next) => {
+router.post('/teachers/new', (request, response, next) => {
   const {username, password} = request.body
   if (!username || !password) {
     return response.send({
@@ -153,7 +153,7 @@ router.get('/teachers/:_id', (request, response, next) => {
 
 /**
  * @api {get} /teachers/edit 获取讲师需要被编辑的讲师信息
- * @apiName teacher/edit
+ * @apiName teachers/edit
  * @apiGroup Teacher
  *
  * @apiParam {string} _id 要编辑的讲师的id
@@ -162,7 +162,7 @@ router.get('/teachers/:_id', (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} teacher  所查询到的用户信息
  */
-router.get('/teacher/edit', (request, response, next) => {
+router.get('/teachers/edit', (request, response, next) => {
   const {_id} = request.query
   if ([12, 24].indexOf(_id && _id.length) === -1) {
     return response.send({
@@ -188,7 +188,7 @@ router.get('/teacher/edit', (request, response, next) => {
 })
 /**
  * @api {post} /teachers/edit 更新被编辑的讲师信息
- * @apiName teacher/edit
+ * @apiName teachers/edit
  * @apiGroup Teacher
  *
  * @apiParam {string} _id 要编辑的讲师的id
@@ -200,7 +200,7 @@ router.get('/teacher/edit', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  */
-router.post('/teacher/edit', (request, response, next) => {
+router.post('/teachers/edit', (request, response, next) => {
   // *注意:* 传入的_id如果不是12或者24位则会报错
   const {_id, username, joinDate, type, gender} = request.body
   if ([12, 24].indexOf(_id && _id.length) === -1) {
@@ -226,7 +226,7 @@ router.post('/teacher/edit', (request, response, next) => {
 
 /**
  * @api {post} /teachers/handler 注销或者启用讲师
- * @apiName teacher/handler
+ * @apiName teachers/handler
  * @apiGroup Teacher
  *
  * @apiParam {string} _id 要编辑的讲师的id
@@ -242,7 +242,7 @@ router.post('/teacher/edit', (request, response, next) => {
  *   status: 0
  * }
  */
-router.post('/teacher/handler', (request, response, next) => {
+router.post('/teachers/handler', (request, response, next) => {
   // *注意:* 传入的_id如果不是12或者24位则会报错
   // mongoose.Types.ObjectId()
   const {_id, status} = request.body
