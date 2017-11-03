@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const db = require('./db.js')
 const courseSchema = mongoose.Schema({
   title: { // 课程名称/标题
-    type: String
+    type: String,
+    unique: true,
   },
   introduce: { // 课程描述/介绍
     type: String
