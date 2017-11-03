@@ -15,6 +15,14 @@ module.exports = router
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示已登陆
  * @apiSuccess {string} errmsg  错误的提示信息
+ * @apiParamExample {javascript}  接口请求示例
+ * axios.post('http://bxg.huoqishi.net/user/status')
+ * .then(res => {})
+ * * @apiSuccessExample {javascript} 响应结果示例
+ * {
+ *   errcode: 0,
+ *   errmsg: '用户已登陆'
+ * }
  */
 router.get('/user/status', (request, response) => {
   response.send({
@@ -34,6 +42,14 @@ router.get('/user/status', (request, response) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} user    当前登陆的用户的部分信息
+ * @apiParamExample {javascript}  接口请求示例
+ * axios.post('http://bxg.huoqishi.net/signin', {username: '前端学院', password: '123456'})
+ * .then(res => {})
+ * @apiSuccessExample {javascript} 响应结果示例
+ * {
+ *   errcode: 0,
+ *   errmsg: '用户已登陆'
+ * }
  */
 router.post('/signin', (request, response, next) => {
   const {username, password} = request.body
@@ -65,8 +81,16 @@ router.post('/signin', (request, response, next) => {
  * @apiName signout
  * @apiGroup User
  *
- * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
+ * @apiSuccess {string} errcode 错误标识码, 为0时，表示已经退出成功!
  * @apiSuccess {string} errmsg  错误的提示信息
+ * @apiParamExample {javascript}  接口请求示例
+ * axios.post('http://bxg.huoqishi.net/signout')
+ * .then(res => {})
+ * @apiSuccessExample {javascript} 响应结果示例
+ * {
+ *   errcode: 0,
+ *   errmsg: '已退出登陆'
+ * }
  */
 router.post('/signout', (request, response, next) => {
   const result = delete request.session.user
@@ -82,7 +106,7 @@ router.post('/signout', (request, response, next) => {
   })
 })
 /**
- * @api {get} /avatar 修改用户个人头像
+ * @api {post} /avatar 修改用户个人头像
  * @apiName /avatar
  * @apiGroup User
  *
@@ -91,6 +115,15 @@ router.post('/signout', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {string} avatar 新头像地址
+ * @apiParamExample {javascript}  接口请求示例
+ * axios.post('http://bxg.huoqishi.net/avatar')
+ * .then(res => {})
+ * @apiSuccessExample {javascript} 响应结果示例
+ * {
+ *   errcode: 0,
+ *   errmsg: 'ok',
+ *   avatar: url.resolve(config.host, filename)
+ * }
  */
 router.post('/avatar', upload.single('avatar'), (request, response, next) => {
   if (!request.file) {
@@ -119,7 +152,11 @@ router.post('/avatar', upload.single('avatar'), (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} user    所查询到的个人资料
- * 
+ * @apiParamExample {javascript}  接口请求示例
+ * const fd = new FormData()
+ * fd.append('avatar', input中的图片)
+ * axios.post('http://bxg.huoqishi.net/avatar', fd)
+ * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
  *    "errcode":0,
@@ -129,10 +166,16 @@ router.post('/avatar', upload.single('avatar'), (request, response, next) => {
  *     "username":"前端学院",
  *     "isdel":false,
  *     "created":"2017-11-02T18:44:14.504Z",
- *     "type":0,
+ *     "type": 1,
  *     "status":0,
- *     "gender":-1,
- *     "avatar":"/img/avatar.jpg"
+ *     "gender":-1, // -1就是未设置性别
+ *     "avatar":"http://bxg.huoqishi.net/img/avatar.jpg",
+ *     "birthDay": "2017-11-1",
+ *     "province": "",
+ *     "city": "",
+ *     "district": "",
+ *     "phone": "131312121211",
+ *     "introduce": "我叫小明，我是中国人，我爱自己的祖国 ...."
  *    }
  *  }
  */
@@ -183,6 +226,14 @@ router.get('/userinfo', (request, response, next) => {
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
+ * @apiParamExample {javascript}  接口请求示例
+ * axios.post('http://bxg.huoqishi.net/userinfo', {username:'', nickname: '', ...})
+ * .then(res => {})
+ * @apiSuccessExample {javascript} 响应结果示例
+ * {
+ *   errcode: 0,
+ *   errmsg: '更新成功'
+ * }
  */
 router.post('/userinfo', (request, response, next) => {
   const {
@@ -226,6 +277,7 @@ router.post('/userinfo', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} region  全国省市区数据
+ * 
  */
 router.get('/region', (request, response) => {
   // result.sendFile('../public/region.json')

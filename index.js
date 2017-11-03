@@ -25,7 +25,7 @@ app.use((req, res, next) => {
       // 需要保证xhr.withCredentials值为true,当然，它的的默认值就是
       // Access-Control-Allow-Credentials
       'Access-Control-Allow-Credentials': true,
-      'Access-Control-Expose-Headers': 'set-cookie', // 允许客户端读取的响应头
+      // 'Access-Control-Expose-Headers': 'set-cookie', // 允许客户端读取的响应头
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE', // 允许浏览器发出的请求类型
       'Access-Control-Allow-Headers': 'Content-Type, cookie', // 额外的自定义头信息, 允许用户发出的头信息
       // 'Access-Control-Allow-Headers': 'cookie', // 额外的自定义头信息, 允许用户发出的头信息
