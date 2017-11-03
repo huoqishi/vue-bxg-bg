@@ -116,7 +116,9 @@ router.post('/signout', (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {string} avatar 新头像地址
  * @apiParamExample {javascript}  接口请求示例
- * axios.post('http://bxg.huoqishi.net/avatar')
+ * const fd = new FormData()
+ * fd.append('avatar', input中的图片)
+ * axios.post('http://bxg.huoqishi.net/avatar', fd)
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
@@ -153,9 +155,7 @@ router.post('/avatar', upload.single('avatar'), (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} user    所查询到的个人资料
  * @apiParamExample {javascript}  接口请求示例
- * const fd = new FormData()
- * fd.append('avatar', input中的图片)
- * axios.post('http://bxg.huoqishi.net/avatar', fd)
+ * axios.post('http://bxg.huoqishi.net/avatar')
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
