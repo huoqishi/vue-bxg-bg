@@ -188,7 +188,7 @@ router.get('/teachers/search', (request, response, next) => {
 
 /**
  * @api {get} /teachers/edit 获取讲师需要被编辑的讲师信息
- * @apiName teachers/edit
+ * @apiName teachers/edit2
  * @apiGroup Teacher
  *
  * @apiParam {string} _id 要编辑的讲师的id
@@ -234,7 +234,7 @@ router.get('/teachers/edit', (request, response, next) => {
 
 /**
  * @api {get} /teachers/{_id} 查看讲师详细信息
- * @apiName teacher/{_id}
+ * @apiName teachers/{_id}
  * @apiGroup Teacher
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
