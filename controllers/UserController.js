@@ -296,6 +296,7 @@ router.post('/userinfo', (request, response, next) => {
  *   }
  * }
  */
+ region.p.000000
 router.get('/region', (request, response) => {
   // result.sendFile('../public/region.json')
   const region = require('../public/region.json')
