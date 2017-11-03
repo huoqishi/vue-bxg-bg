@@ -11,8 +11,8 @@ module.exports = router
  * @apiName /teachers
  * @apiGroup Teacher
  *
- * @apiParam {string} page 页码
- * @apiParam {string} count 需要的数据条数
+ * @apiParam {number} page 页码
+ * @apiParam {number} count 需要的数据条数
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
@@ -190,6 +190,9 @@ router.get('/teachers/search', (request, response, next) => {
  * @apiGroup Teacher
  *
  * @apiParam {string} _id 要编辑的讲师的id
+ * @apiParam {string} username 要编辑的讲师用户名
+ * @apiParam {string} joinDate 要编辑的讲师的入职日期
+ * @apiParam {string} gender 要编辑的讲师的性别
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
@@ -198,6 +201,12 @@ router.get('/teachers/search', (request, response, next) => {
  * axios.get('http://bxg.huoqishi.net/teachers/edit', {params: {_id: '59fb84fb6c220d055206f503'}})
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
+ * {
+ *   username: '小明明'
+ *   joinDate: '1998-1-1',
+ *   type: 0,
+ *   gender: 1
+ * }
  */
 router.get('/teachers/edit', (request, response, next) => {
   const {_id} = request.query
