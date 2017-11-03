@@ -55,7 +55,7 @@ router.get('/teachers', (request, response, next) => {
   page = page === isNaN || page < 1 ? 1 : page
   count = count === isNaN || count < 1 ? 10 : count
   const skip = (page - 1) * count
-  const p1 = Teacher.find({}, ['username', 'nickname', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
+  const p1 = Teacher.find({}, ['username', 'nickname', 'status', 'gender', 'phone', 'birthDay', 'joinDate', 'email'].join(' ')).skip(skip).limit(count).exec()
   const p2 = Teacher.count({})
   Promise.all([p1, p2]).then(results => {
     results[0].forEach(item => item.password = undefined)
