@@ -282,7 +282,15 @@ router.post('/userinfo', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} region  全国省市区数据
- * 
+ * @apiParamExample {javascript}  接口请求示例
+ * axios.get('http://bxg.huoqishi.net/region')
+ * .then(res => {})
+ * @apiSuccessExample {javascript} 响应结果示例
+ * {
+ *   p: {}, // 所有的省
+ *   c: {}, // 所有的市
+ *   d: {}  // 所有的区县
+ * }
  */
 router.get('/region', (request, response) => {
   // result.sendFile('../public/region.json')

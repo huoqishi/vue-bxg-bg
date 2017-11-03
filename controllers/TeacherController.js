@@ -86,12 +86,13 @@ router.use('/teachers', (request, response, next) => {
  *
  * @apiParam {string} username 用户名
  * @apiParam {string} joinDate 入职日期
+ * @apiParam {number} gender 讲师性别, 0为男， 1为女
  * @apiParam {number} type 讲师类型,0是普通讲师，1是管理员
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiParamExample {javascript}  接口请求示例
- * axios.post('http://bxg.huoqishi.net/teacher/new', {username:'', joinDate: '', type: 0})
+ * axios.post('http://bxg.huoqishi.net/teacher/new', {username:'', joinDate: '', type: 0, gender: 1})
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
@@ -145,6 +146,7 @@ router.post('/teachers/new', (request, response, next) => {
  * {
  *   errcode: 0,
  *   errmsg: 'ok',
+ *   total: 2,
  *   teachers: [
  *    {
  *        "_id": "59f90fe49b5463742c8d2cc9",
@@ -190,9 +192,6 @@ router.get('/teachers/search', (request, response, next) => {
  * @apiGroup Teacher
  *
  * @apiParam {string} _id 要编辑的讲师的id
- * @apiParam {string} username 要编辑的讲师用户名
- * @apiParam {string} joinDate 要编辑的讲师的入职日期
- * @apiParam {string} gender 要编辑的讲师的性别
  *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
@@ -354,7 +353,9 @@ router.post('/teachers/edit', (request, response, next) => {
  * @apiSuccess {string} status  修改后讲师的状态
  * @apiParamExample {javascript}  接口请求示例
  * axios.get('http://bxg.huoqishi.net/teacher/edit', {
- *   _id: '59f90fe49b5463742c8d2cc9', status: 0})
+ *   _id: '59f90fe49b5463742c8d2cc9',
+ *   status: 0 // 讲师的status将被修改为0
+ *   })
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
