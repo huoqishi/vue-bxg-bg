@@ -287,9 +287,13 @@ router.post('/userinfo', (request, response, next) => {
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
- *   p: {}, // 所有的省
- *   c: {}, // 所有的市
- *   d: {}  // 所有的区县
+ *   errcode: 0,
+ *   errmsg: 'ok',
+ *   region: {
+ *     p: {}, // 所有的省
+ *     c: {}, // 所有的市
+ *     d: {}  // 所有的区县
+ *   }
  * }
  */
 router.get('/region', (request, response) => {
