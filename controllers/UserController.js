@@ -16,7 +16,7 @@ module.exports = router
  * @apiSuccess {string} errcode 错误标识码, 为0时表示已登陆
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiParamExample {javascript}  接口请求示例
- * axios.post('http://bxg.huoqishi.net/user/status')
+ * axios.get('http://bxg.huoqishi.net/user/status')
  * .then(res => {})
  * * @apiSuccessExample {javascript} 响应结果示例
  * {
@@ -48,7 +48,11 @@ router.get('/user/status', (request, response) => {
  * @apiSuccessExample {javascript} 响应结果示例
  * {
  *   errcode: 0,
- *   errmsg: '用户已登陆'
+ *   errmsg: '用户已登陆',
+ *   user: {
+ *     username: '前端学院'
+ *     avatar: 'http://bxg.huoqishi.net/img/avatar.jpg'
+ *   }
  * }
  */
 router.post('/signin', (request, response, next) => {
@@ -124,7 +128,7 @@ router.post('/signout', (request, response, next) => {
  * {
  *   errcode: 0,
  *   errmsg: 'ok',
- *   avatar: url.resolve(config.host, filename)
+ *   avatar: 'http://bxg.huoqishi.net/img/avatar.jpg'
  * }
  */
 router.post('/avatar', upload.single('avatar'), (request, response, next) => {
@@ -147,7 +151,7 @@ router.post('/avatar', upload.single('avatar'), (request, response, next) => {
     },next)
 })
 /**
- * @api {get} /userinfo 获取个人资料
+ * @api {get} /userinfo 获取个人资料(个人中心)
  * @apiName userinfo
  * @apiGroup User
  * 
@@ -155,7 +159,7 @@ router.post('/avatar', upload.single('avatar'), (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} user    所查询到的个人资料
  * @apiParamExample {javascript}  接口请求示例
- * axios.post('http://bxg.huoqishi.net/avatar')
+ * axios.get('http://bxg.huoqishi.net/userinfo')
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
@@ -207,9 +211,10 @@ router.get('/userinfo', (request, response, next) => {
     })
   }, next)
 })
+
 /**
- * @api {post} /userinfo 更新个人资料
- * @apiName userinfo
+ * @api {post} /userinfo 更新个人资料(个人中心)
+ * @apiName userinfo2
  * @apiGroup User
  *
  * @apiParam {string} username 讲师姓名
@@ -227,7 +232,7 @@ router.get('/userinfo', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiParamExample {javascript}  接口请求示例
- * axios.post('http://bxg.huoqishi.net/userinfo', {username:'', nickname: '', ...})
+ * axios.post('http://bxg.huoqishi.net/userinfo', {username:'', nickname: ''})
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
