@@ -154,7 +154,9 @@ router.get('/userinfo', (request, response, next) => {
         errmsg: '用户不存在a:' + _id
       })
     }
+
     const user = Object.assign(doc, {password: undefined})
+    user.avatar = url.resolve(config.host, user.avatar)
     response.send({
       errcode: 0,
       errmsg: 'ok',
