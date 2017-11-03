@@ -101,11 +101,11 @@ router.use('/teachers', (request, response, next) => {
  * }
  */
 router.post('/teachers/new', (request, response, next) => {
-  const {username, password} = request.body
-  if (!username || !password) {
+  const {username, gender, type, joinDate} = request.body
+  if (!username) {
     return response.send({
       errcode: 10001,
-      errmsg: '用户名或者密码不能为空!'
+      errmsg: '参数不能为空!'
     })
   }
   const p = Teacher.findOne({username}).exec()
