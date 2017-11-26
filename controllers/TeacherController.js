@@ -77,12 +77,12 @@ router.use('/teachers', (request, response, next) => {
       errmsg: '您不是管理员,没有权限进行操作!'
     })
   }
-  next ()
+  next()
 })
 
 /**
- * @api {post} /teacher/new 添加一个新的讲师账号
- * @apiName /teacher/new
+ * @api {post} /teachers/new 添加一个新的讲师账号
+ * @apiName /teachers/new
  * @apiGroup Teacher
  *
  * @apiParam {string} username 用户名
@@ -93,7 +93,7 @@ router.use('/teachers', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiParamExample {javascript}  接口请求示例
- * axios.post('http://bxg.huoqishi.net/teacher/new', {username:'', joinDate: '', type: 0, gender: 1})
+ * axios.post('http://bxg.huoqishi.net/teachers/new', {username:'', joinDate: '', type: 0, gender: 1})
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
@@ -141,7 +141,7 @@ router.post('/teachers/new', (request, response, next) => {
  * @apiSuccess {number} total 查询出的总条数
  * @apiSuccess {Array}  teachers 查询出的所有讲师信息
  * @apiParamExample {javascript}  接口请求示例
- * axios.get('http://bxg.huoqishi.net/teacher/search', { params: {query:'小明'}})
+ * axios.get('http://bxg.huoqishi.net/teachers/search', { params: {query:'小明'}})
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
@@ -242,7 +242,7 @@ router.get('/teachers/edit', (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} teacher  所查询到的用户信息
  * @apiParamExample {javascript}  接口请求示例
- * axios.get('http://bxg.huoqishi.net/teacher/59f90fe49b5463742c8d2cc9')
+ * axios.get('http://bxg.huoqishi.net/teachers/59f90fe49b5463742c8d2cc9')
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
  * {
@@ -308,7 +308,7 @@ router.get('/teachers/:_id', (request, response, next) => {
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiParamExample {javascript}  接口请求示例
- * axios.get('http://bxg.huoqishi.net/teacher/edit', {
+ * axios.get('http://bxg.huoqishi.net/teachers/edit', {
  *   _id: '59f90fe49b5463742c8d2cc9', joinDate: '1997-1-1', type: 0, gender: 0, username: '小明讲师'})
  * .then(res => {})
  * @apiSuccessExample {javascript} 响应结果示例
@@ -353,7 +353,7 @@ router.post('/teachers/edit', (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {string} status  修改后讲师的状态
  * @apiParamExample {javascript}  接口请求示例
- * axios.get('http://bxg.huoqishi.net/teacher/edit', {
+ * axios.get('http://bxg.huoqishi.net/teachers/edit', {
  *   _id: '59f90fe49b5463742c8d2cc9',
  *   status: 0 // 讲师的status将被修改为0
  *   })
@@ -386,9 +386,8 @@ router.post('/teachers/handler', (request, response, next) => {
     }
     response.send({
       errcode: 0,
-      errmsg: 'ok'
+      errmsg: 'ok',
+      status: status
     })
   }, next)
 })
-
-
