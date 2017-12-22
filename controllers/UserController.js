@@ -141,20 +141,20 @@ router.post('/avatar', upload.single('avatar'), (request, response, next) => {
   const {_id} = request.session.user
   const filename = path.basename(request.file.path)
   Teacher.updateMany({_id}, {avatar: filename})
-  .then(result => {
+    .then(result => {
       response.send({
         errcode: 0,
         errmsg: 'ok',
         // avatar
         avatar: url.resolve(config.host, filename)
       })
-    },next)
+    }, next)
 })
 /**
  * @api {get} /userinfo 获取个人资料(个人中心)
  * @apiName userinfo
  * @apiGroup User
- * 
+ *
  * @apiSuccess {string} errcode 错误标识码, 为0时表示没有错误,且操作成功!
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {Object} user    所查询到的个人资料
@@ -193,23 +193,23 @@ router.get('/userinfo', (request, response, next) => {
   // }
   const {_id} = request.session.user
   Teacher.findOne({_id}) // *注意:* 传入的_id如果不是12或者24位则会报错
-  .then(doc => {
-    if (!doc) {
-      return response.send({
-        errcode: 10001,
-        // session: request.session,
-        errmsg: '用户不存在a:' + _id
-      })
-    }
+    .then(doc => {
+      if (!doc) {
+        return response.send({
+          errcode: 10001,
+          // session: request.session,
+          errmsg: '用户不存在a:' + _id
+        })
+      }
 
-    const user = Object.assign(doc, {password: undefined})
-    user.avatar = url.resolve(config.host, user.avatar)
-    response.send({
-      errcode: 0,
-      errmsg: 'ok',
-      user
-    })
-  }, next)
+      const user = Object.assign(doc, {password: undefined})
+      user.avatar = url.resolve(config.host, user.avatar)
+      response.send({
+        errcode: 0,
+        errmsg: 'ok',
+        user
+      })
+    }, next)
 })
 
 /**
@@ -266,12 +266,12 @@ router.post('/userinfo', (request, response, next) => {
     province,
     city,
     district}).then((doc) => {
-      // const teacher = Object.assign(doc, {password: undefined})
-      response.send({
-        errcode: 0,
-        errmsg: '更新成功'
-      })
-    }, next)
+    // const teacher = Object.assign(doc, {password: undefined})
+    response.send({
+      errcode: 0,
+      errmsg: '更新成功'
+    })
+  }, next)
 })
 
 /**
@@ -296,7 +296,7 @@ router.post('/userinfo', (request, response, next) => {
  *   }
  * }
  */
- // region.p.000000 
+// region.p.000000
 router.get('/region', (request, response) => {
   // result.sendFile('../public/region.json')
   const region = require('../public/region.json')
