@@ -353,7 +353,7 @@ router.post('/teachers/edit', (request, response, next) => {
  * @apiSuccess {string} errmsg  错误的提示信息
  * @apiSuccess {string} status  修改后讲师的状态
  * @apiParamExample {javascript}  接口请求示例
- * axios.get('http://bxg.huoqishi.net/teachers/edit', {
+ * axios.post('http://bxg.huoqishi.net/teachers/edit', {
  *   _id: '59f90fe49b5463742c8d2cc9',
  *   status: 0 // 讲师的status将被修改为0
  *   })
