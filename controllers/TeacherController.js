@@ -217,20 +217,20 @@ router.get('/teachers/edit', (request, response, next) => {
     })
   }
   Teacher.findOne({_id}, ['username', 'joinDate', 'type', 'gender'].join(' ')) // *注意:* 传入的_id如果不是12或者24位则会报错
-  .then(doc => {
-    if (!doc) {
-      return response.send({
-        errcode: 10001,
-        errmsg: '讲师不存在'
+    .then(doc => {
+      if (!doc) {
+        return response.send({
+          errcode: 10001,
+          errmsg: '讲师不存在'
+        })
+      }
+      const teacher = Object.assign(doc, {password: undefined})
+      response.send({
+        errcode: 0,
+        errmsg: 'ok',
+        teacher: teacher
       })
-    }
-    const teacher = Object.assign(doc, {password: undefined})
-    response.send({
-      errcode: 0,
-      errmsg: 'ok',
-      teacher: teacher
-    })
-  }, next)
+    }, next)
 })
 
 /**
@@ -278,20 +278,20 @@ router.get('/teachers/:_id', (request, response, next) => {
     })
   }
   Teacher.findOne({_id}) // *注意:* 传入的_id如果不是12或者24位则会报错
-  .then(doc => {
-    if (!doc) {
-      return response.send({
-        errcode: 10001,
-        errmsg: '用户不存在'
+    .then(doc => {
+      if (!doc) {
+        return response.send({
+          errcode: 10001,
+          errmsg: '用户不存在'
+        })
+      }
+      const teacher = Object.assign(doc, {password: undefined})
+      response.send({
+        errcode: 0,
+        errmsg: 'ok',
+        teacher: teacher
       })
-    }
-    const teacher = Object.assign(doc, {password: undefined})
-    response.send({
-      errcode: 0,
-      errmsg: 'ok',
-      teacher: teacher
-    })
-  }, next)
+    }, next)
 })
 
 /**
@@ -327,18 +327,18 @@ router.post('/teachers/edit', (request, response, next) => {
     })
   }
   Teacher.updateMany({_id}, {_id, username, joinDate, type, gender})
-  .then(result => {
-    if (result.n <= 0) {
-      return response.send({
-        errcode: 10001,
-        errmsg: '讲师不存在，请确认_id是不是正确'
+    .then(result => {
+      if (result.n <= 0) {
+        return response.send({
+          errcode: 10001,
+          errmsg: '讲师不存在，请确认_id是不是正确'
+        })
+      }
+      response.send({
+        errcode: 0,
+        errmsg: 'ok'
       })
-    }
-    response.send({
-      errcode: 0,
-      errmsg: 'ok'
-    })
-  }, next)
+    }, next)
 })
 
 /**
@@ -375,19 +375,19 @@ router.post('/teachers/handler', (request, response, next) => {
       errmsg: '正确的_id应该是一个长度为12或者24的字符串'
     })
   }
-  Teacher.updateMany({_id}, {_id, status})
-  .then(result => {
+  Teacher.updateMany({ _id }, { _id, status: parseInt(status) })
+    .then(result => {
     // { ok: 0, n: 0, nModified: 0 }
-    if (result.n <= 0) {
-      return response.send({
-        errcode: 10001,
-        errmsg: '讲师不存在'
+      if (result.n <= 0) {
+        return response.send({
+          errcode: 10001,
+          errmsg: '讲师不存在'
+        })
+      }
+      response.send({
+        errcode: 0,
+        errmsg: 'ok',
+        status: status
       })
-    }
-    response.send({
-      errcode: 0,
-      errmsg: 'ok',
-      status: status
-    })
-  }, next)
+    }, next)
 })

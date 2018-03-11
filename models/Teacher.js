@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
   },
   gender: {
     type: Number,
-    default: -1, // 0 是男孩，1是女孩，-1是未设置值
+    default: -1 // 0 是男孩，1是女孩，-1是未设置值
   },
   joinDate: { // 入职日期
     type: Date,
@@ -41,7 +41,7 @@ const userSchema = mongoose.Schema({
   },
   type: { // 用户类型, 0是普通讲师，1是管理员
     type: Number,
-    default: 0,
+    default: 0
   },
   province: {
     type: String,
