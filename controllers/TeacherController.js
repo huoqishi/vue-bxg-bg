@@ -117,7 +117,8 @@ router.post('/teachers/new', (request, response, next) => {
         errmsg: '用户已存在!'
       })
     }
-    const u = new teacher({username, password})
+    const password = '123456'
+    const u = new Teacher({username, password, gender, type, joinDate})
     const p2 = u.save()
     return p2
   })
